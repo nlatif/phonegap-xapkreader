@@ -43,15 +43,13 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
         String fileName = Helpers.getExpansionAPKFileName(this, true, mainVersionCode);
         if (!Helpers.doesFileExist(this, fileName, mainFileSize, false)) {
             Log.e(LOG_TAG, "ExpansionAPKFile doesn't exist or has a wrong size (" + fileName + ").");
-            if(patchVersionCode != 0) {
-                fileName = Helpers.getExpansionAPKFileName(this, false, patchVersionCode);
-                if (!Helpers.doesFileExist(this, fileName, patchFileSize, false)) {
-                    Log.e(LOG_TAG, "ExpansionAPKFile doesn't exist or has a wrong size (" + fileName + ").");
-                    return false;
-                }
-            }
-            else {
-               return false;
+            return false;
+        }
+        if(patchVersionCode != 0) {
+            fileName = Helpers.getExpansionAPKFileName(this, false, patchVersionCode);
+            if (!Helpers.doesFileExist(this, fileName, patchFileSize, false)) {
+                Log.e(LOG_TAG, "ExpansionAPKFile doesn't exist or has a wrong size (" + fileName + ").");
+                return false;
             }
         }
         return true;
@@ -72,7 +70,7 @@ public class XAPKDownloaderActivity extends Activity implements IDownloaderClien
         // Check if expansion files are available before going any further
         if (!expansionFilesDelivered(mainVersionCode, patchVersionCode, mainFileSize, patchFileSize)) {
 
-            if(downloadOption = true) {
+            if(downloadOption == true) {
                 try {
                     Intent launchIntent = this.getIntent();
 

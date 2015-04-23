@@ -130,27 +130,10 @@ public class XAPKReader extends CordovaPlugin {
         if (null == fileDescriptor) {
 			fileDescriptor = expansionFile.getAssetFileDescriptor(filename);
 			if (null == fileDescriptor) {
-				Log.e(LOG_TAG, "File in mainFile not found (" + filename + ").");
-                if(patchVersion !=0) {
-					fileName = Helpers.getExpansionAPKFileName(ctx, false, patchVersion);
-                    fileName = fileName.substring(0, fileName.lastIndexOf("."));
-                    fileDescriptor = expansionFile.getAssetFileDescriptor(fileName + "/" + filename);
-
-                    if (null == fileDescriptor) {
-                        fileDescriptor = expansionFile.getAssetFileDescriptor(filename);
-                        if (null == fileDescriptor) {
-                            Log.e(LOG_TAG, "File not found (" + filename + ").");
-                            return null;
-                        }
-                    }
-                }
-                else {
-                    return null;
-                }
+				Log.e(LOG_TAG, "File not found (" + filename + ").");
+                return null;
             }
         }
-
-        
 
         // Read file
         InputStream inputStream = fileDescriptor.createInputStream();
